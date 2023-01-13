@@ -97,7 +97,7 @@ const GeneralStyles = createGlobalStyle<StyledPropsModel>`
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.1;
-    overflow: hidden;
+    overflow: auto;
     color: ${(props) => props.theme.common.textColor};
     background-color: ${({ theme }) => theme.common.backgroundColor};
   }
