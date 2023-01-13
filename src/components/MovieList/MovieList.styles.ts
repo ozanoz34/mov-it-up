@@ -9,7 +9,7 @@ const ListContainer = styled.ul`
 
 const MovieListHeader = styled(Typography)`
   font-weight: bold !important;
-  margin: 40px 20px !important;
+  padding: 40px 20px !important;
 `;
 
 export { ListContainer, MovieListHeader };
