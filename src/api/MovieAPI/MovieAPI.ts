@@ -6,7 +6,7 @@ import { MovieListModel } from './MovieAPI.model';
 class MovieAPI {
   static getPopularMovies = (): Promise<MovieListModel> =>
     axios
-      .get(`${BASE_API_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`)
+      .get(`${BASE_API_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=2`)
       .then((response) => response.data);
 }
 

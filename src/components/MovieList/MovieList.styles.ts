@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
 
 const ListContainer = styled.ul`
   display: flex;
@@ -6,4 +7,9 @@ const ListContainer = styled.ul`
   justify-content: space-around;
 `;
 
-export { ListContainer };
+const MovieListHeader = styled(Typography)`
+  font-weight: bold !important;
+  margin: 40px 20px !important;
+`;
+
+export { ListContainer, MovieListHeader };

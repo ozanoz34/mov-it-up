@@ -19,6 +19,9 @@ const MovieList = () => {
 
   return (
     <>
+      <Styled.MovieListHeader variant="h2" color="red">
+        Welcome to Mov It Up Platform
+      </Styled.MovieListHeader>
       {isSuccess && (
         <Styled.ListContainer>
           {data?.results.map((movie) => <MovieListItem movieItem={movie} key={movie.id}/>)}
