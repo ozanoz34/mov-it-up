@@ -1,8 +1,8 @@
 const truncate = (textToTruncate: string): string => {
-  const desiredLength = 250;
+  const desiredLength = 200;
   const textToShow = textToTruncate.substring(0, desiredLength);
 
-  return `${textToShow}...`;
+  return textToTruncate.length > 195 ?  `${textToShow}...` : textToTruncate;
 }
 
 export { truncate };
