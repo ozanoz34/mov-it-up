@@ -1,11 +1,16 @@
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { IconButton } from '@mui/material';
+import { CardActionArea } from '@mui/material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import AddIcon from '@mui/icons-material/Add';
 
 import { MovieListItemModel } from '../../api/MovieAPI/MovieAPI.model';
 import { BASE_IMAGE_URL } from '../../api/utils/consts';
+import * as Styled from './MovieListItem.styles';
+import { truncate } from './MovieListItem.helpers';
 
 type Props = {
   movieItem: MovieListItemModel;
@@ -13,10 +18,19 @@ type Props = {
 };
 
 const MovieListItem = ({ movieItem, className }: Props) => {
-  const { title, overview, release_date, poster_path } = movieItem;
+  const { title, overview, release_date, poster_path, id} = movieItem;
   const movieImage = poster_path ? `${BASE_IMAGE_URL}${poster_path}`: '';
+
+  const addToFavorites = (id: number) => {
+    console.log(id);
+  }
+
+  const addToWatchList = (id: number) => {
+    console.log(id);
+  }
+
   return (
-    <Card sx={{ width: '20%' }} className={className}>
+    <Styled.MovieCard sx={{ width: '20%' }} className={className}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -24,23 +38,29 @@ const MovieListItem = ({ movieItem, className }: Props) => {
           alt={title}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Styled.MovieTitle gutterBottom variant="h5">
             {title}
-          </Typography>
+          </Styled.MovieTitle>
+          <Styled.DescriptionContainer variant="body2" color="text.secondary">
+            {truncate(overview)}
+          </Styled.DescriptionContainer>
           <Typography variant="body2" color="text.secondary">
-            {overview}
+            <a href="#">Read More</a>
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="subtitle2" color="text.secondary">
             Release Date: {release_date}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-      </CardActions>
-    </Card>
+      <Styled.ActionsContainer>
+        <Styled.AddFavouriteIcon onClick={() => addToFavorites(id)}>
+          <FavoriteBorderIcon />
+        </Styled.AddFavouriteIcon>
+        <IconButton onClick={() => addToWatchList(id)}>
+          <AddIcon />
+        </IconButton>
+      </Styled.ActionsContainer>
+    </Styled.MovieCard>
   );
 };
 

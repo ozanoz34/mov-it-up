@@ -29,6 +29,9 @@ const AppearanceProvider = ({ children, isDarkMode }: Props) => {
         paper: 'green',
         default: 'yellow',
       },
+      primary: {
+        main: '#FF0000',
+      },
       text: {
         primary: theme.common.textColor,
       },
