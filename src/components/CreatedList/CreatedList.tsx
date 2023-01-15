@@ -1,29 +1,34 @@
-import { UseQueryResult, useQuery } from 'react-query';
-
+import { useQuery } from 'react-query';
 import { MovieListModel, ErrorResponseModel, QUERY } from '../../api/MovieAPI/MovieAPI.model';
 import MovieAPI from '../../api/MovieAPI/MovieAPI';
 import { MovieListItem, Alert } from '../';
+import { CREATED_LIST_TYPE } from './CreatedList.models';
 
-import * as Styled from './MovieList.styles';
+import * as Styled from '../MovieList/MovieList.styles';;
 
 type Props = {
-  query: UseQueryResult<MovieListModel, ErrorResponseModel>;
   header: string;
+  listType: CREATED_LIST_TYPE;
 }
 
-const MovieList = ({
-  query,
+const CreatedList = ({
   header,
+  listType,
 }: Props) => {
-  const { data, isError, isSuccess, error } = query;
   const favoriteMoviesQuery = useQuery<
     MovieListModel, ErrorResponseModel
   >(QUERY.FAVORITE_MOVIES, () => MovieAPI.getFavoriteMovies());
   const watchListMoviesQuery = useQuery<
     MovieListModel, ErrorResponseModel
   >(QUERY.WATCHLIST_MOVIES, () => MovieAPI.getWatchListMovies());
-  const favorite: number[] | undefined = favoriteMoviesQuery.data?.results.map(({id}) => id);
-  const watchList: number[] | undefined = watchListMoviesQuery.data?.results.map(({id}) => id);
+  const { 
+    data,
+    isError,
+    isSuccess,
+    error,
+  } = listType === CREATED_LIST_TYPE.FAVORITE ? favoriteMoviesQuery : watchListMoviesQuery;
+  const favoriteIds = favoriteMoviesQuery.data?.results.map(({id}) => id);
+  const watchListIds = watchListMoviesQuery.data?.results.map(({id}) => id);
 
   if(isError) {
     return <Alert severity="error">{error?.response.status}: {error?.response.data.status_message}</Alert>;
@@ -36,15 +41,15 @@ const MovieList = ({
       </Styled.MovieListHeader>
       {isSuccess && data && (
         <Styled.ListContainer>
-          {data.results.length > 0 && 
+          {data?.results?.length > 0 && 
             data.results.map((movie) => 
               <MovieListItem
                 movieItem={movie}
                 favoriteMoviesQuery={favoriteMoviesQuery}
                 watchListMoviesQuery={watchListMoviesQuery}
                 key={movie.id}
-                favorites={favorite}
-                watchList={watchList}
+                favorites={favoriteIds}
+                watchList={watchListIds}
               />
           )}
         </Styled.ListContainer>
@@ -53,4 +58,4 @@ const MovieList = ({
   );
 };
 
-export default MovieList;
+export default CreatedList;

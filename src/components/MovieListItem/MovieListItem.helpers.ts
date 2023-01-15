@@ -3,6 +3,12 @@ const truncate = (textToTruncate: string): string => {
   const textToShow = textToTruncate.substring(0, desiredLength);
 
   return textToTruncate.length > 195 ?  `${textToShow}...` : textToTruncate;
-}
+};
 
-export { truncate };
+const calculateKey = (list: number[], id: number): boolean => {
+  const isAlreadyAdded = list.includes(id);
+
+  return isAlreadyAdded ? false : true;
+};
+
+export { truncate, calculateKey };

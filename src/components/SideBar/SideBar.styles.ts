@@ -1,5 +1,4 @@
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
+import { Button, List } from '@mui/material';
 import styled from 'styled-components';
 
 const SideBar = styled(List)`
@@ -24,7 +23,7 @@ const MenuClose = styled(Button)`
 `;
 
 const MenuOpen = styled(Button)`
-  position: absolute !important;
+  position: fixed !important;
   width: 50px;
   height: 50px;
   left: 0;

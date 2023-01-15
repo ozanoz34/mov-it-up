@@ -1,22 +1,22 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import MovieList from "../../components/MovieList";
-import WatchList from "../../components/WatchList";
-import FavoriteList from "../../components/FavoriteList";
-import SideBar from '../../components/SideBar';
+import { AllMovies, WatchList, FavoriteList, SideBar, MovieDetails } from '../../components'; 
 
 const BaseLayout = () => (
   <>
     <SideBar />
     <Router>
       <Routes>
-        <Route path="/" element={<MovieList />} />
+        <Route path="/" element={<AllMovies />} />
       </Routes>
       <Routes>
         <Route path="/watch-list" element={<WatchList />} />
       </Routes>
       <Routes>
         <Route path="/favorite-list" element={<FavoriteList />} />
+      </Routes>
+      <Routes>
+        <Route path="/movie-details/:id" element={<MovieDetails />} />
       </Routes>
     </Router>
   </>
