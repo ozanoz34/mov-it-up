@@ -1,4 +1,7 @@
 import { useQuery } from 'react-query';
+import { useSelector } from 'react-redux';
+
+import { getSearchResults } from '../../redux/Movies.redux';
 import { MovieListModel, ErrorResponseModel, QUERY } from '../../api/MovieAPI/MovieAPI.model';
 import MovieAPI from '../../api/MovieAPI/MovieAPI';
 import { MovieListItem, Alert } from '../';
@@ -15,6 +18,7 @@ const CreatedList = ({
   header,
   listType,
 }: Props) => {
+  const searchResults = useSelector(getSearchResults);
   const favoriteMoviesQuery = useQuery<
     MovieListModel, ErrorResponseModel
   >(QUERY.FAVORITE_MOVIES, () => MovieAPI.getFavoriteMovies());
@@ -39,21 +43,34 @@ const CreatedList = ({
       <Styled.MovieListHeader variant="h2" color="red">
         {header}
       </Styled.MovieListHeader>
-      {isSuccess && data && (
-        <Styled.ListContainer>
-          {data?.results?.length > 0 && 
-            data.results.map((movie) => 
-              <MovieListItem
-                movieItem={movie}
-                favoriteMoviesQuery={favoriteMoviesQuery}
-                watchListMoviesQuery={watchListMoviesQuery}
-                key={movie.id}
-                favorites={favoriteIds}
-                watchList={watchListIds}
-              />
-          )}
-        </Styled.ListContainer>
-      )}
+      <Styled.ListContainer>
+      {listType === CREATED_LIST_TYPE.SEARCH_RESULTS ? (
+        searchResults?.length > 0 && 
+          searchResults.map((movie) => 
+            <MovieListItem
+              movieItem={movie}
+              favoriteMoviesQuery={favoriteMoviesQuery}
+              watchListMoviesQuery={watchListMoviesQuery}
+              key={movie.id}
+              favorites={favoriteIds}
+              watchList={watchListIds}
+            />
+        )
+      ): (
+        data && data?.results?.length > 0 && isSuccess &&
+          data.results.map((movie) => 
+            <MovieListItem
+              movieItem={movie}
+              favoriteMoviesQuery={favoriteMoviesQuery}
+              watchListMoviesQuery={watchListMoviesQuery}
+              key={movie.id}
+              favorites={favoriteIds}
+              watchList={watchListIds}
+            />
+          )
+        )}
+      </Styled.ListContainer>
+      )
     </>
   );
 };

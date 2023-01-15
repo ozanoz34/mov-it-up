@@ -42,6 +42,7 @@ enum QUERY {
   POPULAR_MOVIES = 'popularMovies',
   FAVORITE_MOVIES = 'favoriteMovies',
   WATCHLIST_MOVIES = 'watchlistMovies',
+  SEARCHED_MOVIES = 'searchedMovies',
 };
 
 export type { MovieListItemModel, MovieListModel, ErrorResponseModel, PostModel };

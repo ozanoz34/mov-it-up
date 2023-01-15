@@ -5,5 +5,8 @@ export { default as FavoriteList } from './FavoriteList';
 export { default as MovieDetails } from './MovieDetails';
 export { default as MovieList } from './MovieList';
 export { default as MovieListItem } from './MovieListItem';
+export { default as SearchBar } from './SearchBar';
+export { default as SearchResults } from './SearchResults';
 export { default as SideBar } from './SideBar';
+export { default as ThemeSwitch } from './ThemeSwitch';
 export { default as WatchList } from './WatchList';
