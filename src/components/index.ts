@@ -1,0 +1,9 @@
+export { default as Alert } from './Alert';
+export { default as AllMovies } from './AllMovies';
+export { default as CreatedList } from './CreatedList';
+export { default as FavoriteList } from './FavoriteList';
+export { default as MovieDetails } from './MovieDetails';
+export { default as MovieList } from './MovieList';
+export { default as MovieListItem } from './MovieListItem';
+export { default as SideBar } from './SideBar';
+export { default as WatchList } from './WatchList';

@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import Drawer from '@mui/material/Drawer';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
+import { ListItem, ListItemButton, Drawer } from '@mui/material';
 import * as Styled from './SideBar.styles';
 
 type Props = {
@@ -11,7 +9,7 @@ type Props = {
 }
 
 const SideBar = ({className}: Props) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleClose = () => {
     setIsMenuOpen(false);

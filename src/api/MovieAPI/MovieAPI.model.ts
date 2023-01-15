@@ -33,9 +33,16 @@ type MovieListModel = {
   results: MovieListItemModel[];
 };
 
-enum QUERY {
-  POPULAR_MOVIES = 'popularMovies',
+type PostModel = {
+  id: number;
+  key: boolean;
 }
 
-export type { MovieListItemModel, MovieListModel, ErrorResponseModel };
+enum QUERY {
+  POPULAR_MOVIES = 'popularMovies',
+  FAVORITE_MOVIES = 'favoriteMovies',
+  WATCHLIST_MOVIES = 'watchlistMovies',
+};
+
+export type { MovieListItemModel, MovieListModel, ErrorResponseModel, PostModel };
 export { QUERY };
