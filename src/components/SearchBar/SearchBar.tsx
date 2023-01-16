@@ -55,8 +55,11 @@ const SearchBar = ({ className }: Props) => {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Enter your movie name"
           onKeyDown={(e) => onKeyPressed(e)}
+          data-testid="search-bar-input"
         />
-        <Styled.SearchButton onClick={handleSearch} className={className}>Search</Styled.SearchButton>
+        <Styled.SearchButton onClick={handleSearch} className={className} data-testid="search-bar-button">
+          Search
+        </Styled.SearchButton>
       </div>
     </>
   );

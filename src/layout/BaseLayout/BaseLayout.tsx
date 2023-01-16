@@ -8,6 +8,7 @@ import {
   SideBar,
   MovieDetails,
   SearchBar,
+  PageNotFound,
   SearchResults,
   ThemeSwitch,
 } from '../../components';
@@ -28,18 +29,11 @@ const BaseLayout = () => {
       <SearchBar />
       <>
         <Routes>
+          <Route path="/:404" element={<PageNotFound />} />
           <Route path="/" element={<AllMovies />} />
-        </Routes>
-        <Routes>
           <Route path="/watch-list" element={<WatchList />} />
-        </Routes>
-        <Routes>
           <Route path="/favorite-list" element={<FavoriteList />} />
-        </Routes>
-        <Routes>
           <Route path="/movie-details/:id" element={<MovieDetails />} />
-        </Routes>
-        <Routes>
           <Route path="/search-results" element={<SearchResults />} />
         </Routes>
       </>

@@ -5,7 +5,8 @@ const ListContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 20px 50px;
+  margin: 20px 50px 0;
+  padding-bottom: 30px;
 `;
 
 const MovieListHeader = styled(Typography)`

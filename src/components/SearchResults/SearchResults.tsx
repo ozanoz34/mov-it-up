@@ -5,6 +5,7 @@ const SearchResults = () => (
   <CreatedList
     header="Search Results"
     listType={CREATED_LIST_TYPE.SEARCH_RESULTS}
+    data-testid="search-results-page"
   />
 );
 

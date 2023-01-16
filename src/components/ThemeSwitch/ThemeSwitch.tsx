@@ -19,7 +19,7 @@ const ThemeSwitch = () => {
   };
 
   return (
-    <Styled.SwitchContainer>
+    <Styled.SwitchContainer data-testid="theme-switch">
       <Styled.SwitchLabel>Theme Switch</Styled.SwitchLabel>
       <Switch
         checked={checked}
