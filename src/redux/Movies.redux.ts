@@ -9,7 +9,7 @@ interface MoviesStateModel {
 
 const initialState: MoviesStateModel = {
   searchResults: [],
-  isDark: false,
+  isDark: true,
 };
 
 const reducerName = 'movies';
@@ -22,10 +22,14 @@ const moviesSlice = createSlice({
       ...state,
       searchResults: action.payload,
     }),
-    setIsDark: (state, action: PayloadAction<boolean>) => ({
-      ...state,
-      isDark: action.payload,
-    }),
+    setIsDark: (state, action: PayloadAction<boolean>) => {
+      localStorage.setItem('DarkMode', JSON.stringify(action.payload));
+
+      return {
+        ...state,
+        isDark: action.payload,
+      };
+    },
   }
 });
 

@@ -8,7 +8,8 @@ import * as Styled from './ThemeSwitch.styles';
 
 const ThemeSwitch = () => {
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(true);
+  const initialMode = localStorage.getItem('DarkMode') === 'true' ? true : false;
+  const [checked, setChecked] = useState(initialMode); //change at the end
 
   useEffect(() => {
     dispatch(setIsDark(checked));

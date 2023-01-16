@@ -1,5 +1,5 @@
 import { useMutation, UseQueryResult } from 'react-query';
-import { CardContent, CardMedia, Typography } from '@mui/material';
+import { CardContent, CardMedia } from '@mui/material';
 import { CardActionArea } from '@mui/material';
 
 import { MovieListItemModel, ErrorResponseModel, PostModel, MovieListModel} from '../../api/MovieAPI/MovieAPI.model';
@@ -58,7 +58,7 @@ const MovieListItem = ({
   };
 
   return (
-    <Styled.MovieCard sx={{ width: '20%' }} className={className} data-testid="movie-card-item">
+    <Styled.MovieCard className={className} data-testid="movie-card-item">
       <CardActionArea>
         <CardMedia
           component="img"
@@ -69,12 +69,12 @@ const MovieListItem = ({
           <Styled.MovieTitle gutterBottom variant="h5" data-testid="movie-card-title">
             {title}
           </Styled.MovieTitle>
-          <Typography variant="body2" color="text.secondary">
+          <Styled.MovieInfo variant="body2" color="text.secondary">
             <a href={`/movie-details/${id}`}>Read More</a>
-          </Typography>
-          <Typography variant="subtitle2" color="text.secondary">
+          </Styled.MovieInfo>
+          <Styled.MovieInfo variant="subtitle2" color="text.secondary">
             Release Date: {release_date}
-          </Typography>
+          </Styled.MovieInfo>
         </CardContent>
       </CardActionArea>
       <MovieListItemActions

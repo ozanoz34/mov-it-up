@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { StyledPropsModel } from '../../appearance/types';
 
-const PageNotFoundContainer = styled.div`
-  background: darkgray;
+const PageNotFoundContainer = styled.div<StyledPropsModel>`
+  background-color: ${(({theme}) => theme.common.notFoundBgColor)};
   height: 100%;
   width: 100%;
   display: flex;
@@ -9,6 +10,7 @@ const PageNotFoundContainer = styled.div`
   alight-items: center;
   justify-content: center;
   min-height: 500px;
+  padding: 40px;
 `;
 
 export { PageNotFoundContainer };
