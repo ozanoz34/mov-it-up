@@ -11,8 +11,6 @@ const addToWatchList = jest.fn();
 
 const MovieListItemMockProps = {
   movieItem: movieMock,
-  favorites: [76600],
-  watchList: [76600],
   addToFavorites,
   addToWatchList,
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { API_KEY, BASE_API_URL, SESSION_ID } from '../utils/consts';
-import { MovieListModel, PostModel } from './MovieAPI.model';
+import { MovieListItemModel, MovieListModel, PostModel, TrailerResponseModel } from './MovieAPI.model';
 
 class MovieAPI {
   static getPopularMovies = (): Promise<MovieListModel> =>
@@ -17,6 +17,16 @@ class MovieAPI {
   static getSearchedMovie = (query: string): Promise<MovieListModel> =>
     axios
       .get(`${BASE_API_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
+      .then((response) => response.data);
+
+  static getMovieDetails = (movieId: string): Promise<MovieListItemModel> =>
+    axios
+      .get(`${BASE_API_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`)
+      .then((response) => response.data);
+
+  static getMovieTrailer = (movieId: string): Promise<TrailerResponseModel> =>
+    axios
+      .get(`${BASE_API_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`)
       .then((response) => response.data);
       
   static getWatchListMovies = (): Promise<MovieListModel> =>
