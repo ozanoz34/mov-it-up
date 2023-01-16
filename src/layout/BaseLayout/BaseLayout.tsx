@@ -6,7 +6,7 @@ import {
   WatchList,
   FavoriteList,
   SideBar,
-  MovieDetails,
+  MoviePage,
   SearchBar,
   PageNotFound,
   SearchResults,
@@ -33,7 +33,7 @@ const BaseLayout = () => {
           <Route path="/" element={<AllMovies />} />
           <Route path="/watch-list" element={<WatchList />} />
           <Route path="/favorite-list" element={<FavoriteList />} />
-          <Route path="/movie-details/:id" element={<MovieDetails />} />
+          <Route path="/movie/:id" element={<MoviePage />} />
           <Route path="/search-results" element={<SearchResults />} />
         </Routes>
       </>

@@ -5,6 +5,8 @@ import { configureStore } from '@reduxjs/toolkit'
 import type { PreloadedState } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter } from 'react-router-dom';
+import AppearanceProvider from '../appearance/components/AppearanceProvider/AppearanceProvider'
 
 import type { RootState } from '../app/store'
 // As a basic setup, import your same slice reducers
@@ -30,9 +32,13 @@ export function renderWithProviders(
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return (
       <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          {children}
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <AppearanceProvider>
+              {children}
+            </AppearanceProvider>
+          </Provider>
+        </BrowserRouter>
       </QueryClientProvider>)
   };
 

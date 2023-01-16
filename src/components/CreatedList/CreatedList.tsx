@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { getSearchResults } from '../../redux/Movies.redux';
+import { getSearchResults, setFavoriteList, setWatchList } from '../../redux/Movies.redux';
 import { MovieListModel, ErrorResponseModel, QUERY } from '../../api/MovieAPI/MovieAPI.model';
 import MovieAPI from '../../api/MovieAPI/MovieAPI';
 import { MovieListItem, Alert, PageHeader, Spinner} from '../';
@@ -18,6 +19,7 @@ const CreatedList = ({
   header,
   listType,
 }: Props) => {
+  const dispatch = useDispatch();
   const searchResults = useSelector(getSearchResults);
   const favoriteMoviesQuery = useQuery<
     MovieListModel, ErrorResponseModel
@@ -32,8 +34,16 @@ const CreatedList = ({
     error,
     isLoading,
   } = listType === CREATED_LIST_TYPE.FAVORITE ? favoriteMoviesQuery : watchListMoviesQuery;
-  const favoriteIds = favoriteMoviesQuery.data?.results.map(({id}) => id);
-  const watchListIds = watchListMoviesQuery.data?.results.map(({id}) => id);
+  
+  useEffect(() => {
+    const favorite = favoriteMoviesQuery.data?.results.map(({id}) => id) as number[];
+    dispatch(setFavoriteList(favorite));
+  }, [dispatch, favoriteMoviesQuery.data]);
+
+  useEffect(() => {
+    const watchList = watchListMoviesQuery.data?.results.map(({id}) => id) as number [];
+    dispatch(setWatchList(watchList));
+  }, [dispatch, watchListMoviesQuery.data]);
 
   if(isError) {
     return <Alert severity="error">{error?.response.status}: {error?.response.data.status_message}</Alert>;
@@ -55,8 +65,6 @@ const CreatedList = ({
               favoriteMoviesQuery={favoriteMoviesQuery}
               watchListMoviesQuery={watchListMoviesQuery}
               key={movie.id}
-              favorites={favoriteIds}
-              watchList={watchListIds}
             />
         )
       ): (
@@ -67,8 +75,7 @@ const CreatedList = ({
               favoriteMoviesQuery={favoriteMoviesQuery}
               watchListMoviesQuery={watchListMoviesQuery}
               key={movie.id}
-              favorites={favoriteIds}
-              watchList={watchListIds}
+              isDynamicList={true}
             />
           )
         )}

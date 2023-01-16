@@ -4,18 +4,20 @@ import {
   StylesProvider,
 } from '@material-ui/core/styles';
 import React, { ReactNode } from 'react';
+import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
+import { getIsDark } from '../../../redux/Movies.redux';
 import themeConfiguration from '../../theme';
 import { ThemeModel } from '../../types';
 import GeneralStyles from '../GeneralStyles';
 
 type Props = {
   children: ReactNode;
-  isDarkMode?: boolean;
 };
 
-const AppearanceProvider = ({ children, isDarkMode }: Props) => {
+const AppearanceProvider = ({ children }: Props) => {
+  const isDarkMode = useSelector(getIsDark);
   const theme: ThemeModel = isDarkMode ? themeConfiguration.dark : themeConfiguration.light;
 
   const materialTheme = createTheme({
@@ -25,16 +27,6 @@ const AppearanceProvider = ({ children, isDarkMode }: Props) => {
     },
     palette: {
       type: isDarkMode ? 'dark' : 'light',
-      background: {
-        paper: 'green',
-        default: 'yellow',
-      },
-      primary: {
-        main: '#FF0000',
-      },
-      text: {
-        primary: theme.common.textColor,
-      },
       // will change when color pallete is provided
       action: {
         hover: 'rgba(0, 0, 0, 0.08)',

@@ -7,6 +7,10 @@ const SearchInput = styled.input`
   border-radius: 10px;
   font-size: 1.5rem;
   margin: 40px 0;
+
+  @media (max-width: 550px) {
+    font-size: 1rem;
+  }
 `;
 
 const SearchButton = styled(Button)`
@@ -14,6 +18,12 @@ const SearchButton = styled(Button)`
   border-radius: 10px !important;
   margin-left: -120px !important;
   margin-top: -8px !important;
+
+  @media (max-width: 550px) {
+    font-size: 1rem !important;
+    margin-left: -90px !important;
+    margin-top: -2px !important;
+  }
 `;
 
 

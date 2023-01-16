@@ -8,8 +8,11 @@ type ThemeModel = {
     titleColor: string;
     backgroundColor: string;
     textColor: string;
-    buttonBgColor: string;
-    buttonTextColor: string;
+    titleBackgroundColor: string;
+    switchLabelColor: string;
+    favoriteIconColor: string;
+    watchListIconColor: string;
+    notFoundBgColor: string;
   }
 };
 

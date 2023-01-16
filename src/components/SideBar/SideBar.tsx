@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import { ListItem, ListItemButton, Drawer } from '@mui/material';
+import { ListItem, ListItemButton } from '@mui/material';
 import * as Styled from './SideBar.styles';
 
 type Props = {
   className?: string;
 }
 
-const SideBar = ({className}: Props) => {
+const SideBar = ({ className }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleClose = () => {
@@ -48,7 +48,7 @@ const SideBar = ({className}: Props) => {
           <MenuIcon />
         </Styled.MenuOpen>
       )}
-      <Drawer
+      <Styled.Slider
         open={isMenuOpen}
         onClose={handleClose}
       >
@@ -56,7 +56,7 @@ const SideBar = ({className}: Props) => {
           <CloseIcon />
         </Styled.MenuClose>
         {navigationList()}
-      </Drawer>
+      </Styled.Slider>
     </>
   );
 };

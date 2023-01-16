@@ -24,6 +24,7 @@ type MovieListItemModel = {
   vote_count: number;
   video: boolean;
   vote_average: number;
+  homepage: string;
 };
 
 type MovieListModel = {
@@ -36,14 +37,36 @@ type MovieListModel = {
 type PostModel = {
   id: number;
   key: boolean;
+};
+
+type TrailerModel = {
+  name: string;
+  key: string;
+  site: string;
+  type: string;
+  id: string;
 }
+
+type TrailerResponseModel = {
+  id: number;
+  results: TrailerModel[];
+};
 
 enum QUERY {
   POPULAR_MOVIES = 'popularMovies',
   FAVORITE_MOVIES = 'favoriteMovies',
   WATCHLIST_MOVIES = 'watchlistMovies',
   SEARCHED_MOVIES = 'searchedMovies',
+  MOVIE_DETAILS = 'movieDetails',
+  TRAILER = 'trailer',
 };
 
-export type { MovieListItemModel, MovieListModel, ErrorResponseModel, PostModel };
+export type {
+  MovieListItemModel,
+  MovieListModel,
+  ErrorResponseModel,
+  PostModel,
+  TrailerResponseModel,
+  TrailerModel
+};
 export { QUERY };

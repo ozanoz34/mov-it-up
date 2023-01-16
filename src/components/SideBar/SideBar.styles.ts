@@ -1,8 +1,17 @@
-import { Button, List } from '@mui/material';
+import { Button, List, Drawer } from '@mui/material';
 import styled from 'styled-components';
 
-const SideBar = styled(List)`
+import { StyledPropsModel } from '../../appearance/types';
+
+const SideBar = styled(List)<StyledPropsModel>`
   width: 35vh;
+`;
+
+const Slider = styled(Drawer)<StyledPropsModel>`
+  .MuiPaper-root {
+    background-color: ${(({theme}) => theme.common.backgroundColor)};
+    color: ${(({theme}) => theme.common.textColor)};
+  }
 `;
 
 const Link = styled.a`
@@ -35,4 +44,4 @@ const MenuOpen = styled(Button)`
   }
 `;
 
-export { SideBar, Link, MenuClose, MenuOpen };
+export { SideBar, Link, MenuClose, MenuOpen, Slider };

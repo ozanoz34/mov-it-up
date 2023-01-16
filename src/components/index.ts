@@ -6,6 +6,7 @@ export { default as MovieDetails } from './MovieDetails';
 export { default as MovieList } from './MovieList';
 export { default as MovieListItem } from './MovieListItem';
 export { default as MovieListItemActions } from './MovieListItemActions';
+export { default as MoviePage } from './MoviePage';
 export { default as PageHeader } from './PageHeader';
 export { default as PageNotFound } from './PageNotFound';
 export { default as SearchBar } from './SearchBar';

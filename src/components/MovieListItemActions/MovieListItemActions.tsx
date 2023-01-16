@@ -1,5 +1,4 @@
 import { Tooltip } from '@mui/material';
-import { IconButton } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddIcon from '@mui/icons-material/Add';
@@ -19,13 +18,13 @@ const MovieListItemActions = ({addToFavorites, addToWatchList, id, favorites, wa
   <Styled.ActionsContainer data-testid="movie-card-actions">
     <Tooltip title="Favorites">
       <Styled.AddFavouriteIcon onClick={() => addToFavorites(id)} data-testid="movie-card-add-fav">
-        {favorites.includes(id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        {favorites?.includes(id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       </Styled.AddFavouriteIcon>
     </Tooltip>
     <Tooltip title="WatchList">
-      <IconButton onClick={() => addToWatchList(id)} data-testid="movie-card-add-watch">
-        {watchList.includes(id) ? <RemoveIcon /> :<AddIcon />}
-      </IconButton>
+      <Styled.AddWatchListIcon onClick={() => addToWatchList(id)} data-testid="movie-card-add-watch">
+        {watchList?.includes(id) ? <RemoveIcon /> :<AddIcon />}
+      </Styled.AddWatchListIcon>
     </Tooltip>
   </Styled.ActionsContainer>
 );

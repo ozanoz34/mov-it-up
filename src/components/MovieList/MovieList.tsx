@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import { UseQueryResult, useQuery } from 'react-query';
+import { useDispatch } from 'react-redux';
 
 import { MovieListModel, ErrorResponseModel, QUERY } from '../../api/MovieAPI/MovieAPI.model';
+import { setFavoriteList, setWatchList } from '../../redux/Movies.redux';
 import MovieAPI from '../../api/MovieAPI/MovieAPI';
 import { MovieListItem, Alert, PageHeader, Spinner } from '../';
 
@@ -15,6 +18,7 @@ const MovieList = ({
   query,
   header,
 }: Props) => {
+  const dispatch = useDispatch();
   const { data, isError, isSuccess, error, isLoading } = query;
   const favoriteMoviesQuery = useQuery<
     MovieListModel, ErrorResponseModel
@@ -22,8 +26,16 @@ const MovieList = ({
   const watchListMoviesQuery = useQuery<
     MovieListModel, ErrorResponseModel
   >(QUERY.WATCHLIST_MOVIES, () => MovieAPI.getWatchListMovies());
-  const favorite: number[] | undefined = favoriteMoviesQuery.data?.results.map(({id}) => id);
-  const watchList: number[] | undefined = watchListMoviesQuery.data?.results.map(({id}) => id);
+
+  useEffect(() => {
+    const favorite = favoriteMoviesQuery.data?.results.map(({id}) => id) as number[];
+    dispatch(setFavoriteList(favorite));
+  }, [dispatch, favoriteMoviesQuery.data]);
+
+  useEffect(() => {
+    const watchList = watchListMoviesQuery.data?.results.map(({id}) => id) as number [];
+    dispatch(setWatchList(watchList));
+  }, [dispatch, watchListMoviesQuery.data])
 
   if(isError) {
     return <Alert severity="error">{error?.response.status}: {error?.response.data.status_message}</Alert>;
@@ -45,8 +57,6 @@ const MovieList = ({
                 favoriteMoviesQuery={favoriteMoviesQuery}
                 watchListMoviesQuery={watchListMoviesQuery}
                 key={movie.id}
-                favorites={favorite}
-                watchList={watchList}
               />
           )}
         </Styled.ListContainer>
