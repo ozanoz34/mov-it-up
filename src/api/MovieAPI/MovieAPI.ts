@@ -14,6 +14,11 @@ class MovieAPI {
       .get(`${BASE_API_URL}/account/a/favorite/movies?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US`)
       .then((response) => response.data);
 
+  static getSearchedMovie = (query: string): Promise<MovieListModel> =>
+    axios
+      .get(`${BASE_API_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
+      .then((response) => response.data);
+      
   static getWatchListMovies = (): Promise<MovieListModel> =>
     axios
       .get(`${BASE_API_URL}/account/a/watchlist/movies?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US`)

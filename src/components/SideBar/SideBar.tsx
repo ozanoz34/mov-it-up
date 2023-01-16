@@ -16,7 +16,7 @@ const SideBar = ({className}: Props) => {
   };
 
   const navigationList = () => (
-    <Styled.SideBar className={className}>
+    <Styled.SideBar className={className} data-testid="sidebar-link-list">
       <ListItem>
         <ListItemButton>
         <Styled.Link href="/">
@@ -44,7 +44,7 @@ const SideBar = ({className}: Props) => {
   return (
     <>
       {!isMenuOpen && (
-        <Styled.MenuOpen onClick={() => setIsMenuOpen(true)} className={className}>
+        <Styled.MenuOpen onClick={() => setIsMenuOpen(true)} className={className} data-testid="sidebar-open-icon">
           <MenuIcon />
         </Styled.MenuOpen>
       )}
@@ -52,7 +52,7 @@ const SideBar = ({className}: Props) => {
         open={isMenuOpen}
         onClose={handleClose}
       >
-        <Styled.MenuClose onClick={handleClose} className={className}>
+        <Styled.MenuClose onClick={handleClose} className={className} data-testid="sidebar-close-icon">
           <CloseIcon />
         </Styled.MenuClose>
         {navigationList()}

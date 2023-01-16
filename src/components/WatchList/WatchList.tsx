@@ -5,6 +5,7 @@ const WatchList = () => (
   <CreatedList
     header="Watch Listed Movies"
     listType={CREATED_LIST_TYPE.WATCHLIST}
+    data-testid="watch-list"
   />
 );
 

@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from 'react-query';
 
 import { MovieListModel, ErrorResponseModel, QUERY } from '../../api/MovieAPI/MovieAPI.model';
 import MovieAPI from '../../api/MovieAPI/MovieAPI';
-import { MovieListItem, Alert } from '../';
+import { MovieListItem, Alert, PageHeader, Spinner } from '../';
 
 import * as Styled from './MovieList.styles';
 
@@ -15,7 +15,7 @@ const MovieList = ({
   query,
   header,
 }: Props) => {
-  const { data, isError, isSuccess, error } = query;
+  const { data, isError, isSuccess, error, isLoading } = query;
   const favoriteMoviesQuery = useQuery<
     MovieListModel, ErrorResponseModel
   >(QUERY.FAVORITE_MOVIES, () => MovieAPI.getFavoriteMovies());
@@ -29,13 +29,15 @@ const MovieList = ({
     return <Alert severity="error">{error?.response.status}: {error?.response.data.status_message}</Alert>;
   };
 
+  if(isLoading) {
+    return <Spinner open={true} />
+  };
+
   return (
     <>
-      <Styled.MovieListHeader variant="h2" color="red">
-        {header}
-      </Styled.MovieListHeader>
+      <PageHeader title={header} />
       {isSuccess && data && (
-        <Styled.ListContainer>
+        <Styled.ListContainer data-testid='movie-list-container'>
           {data.results.length > 0 && 
             data.results.map((movie) => 
               <MovieListItem

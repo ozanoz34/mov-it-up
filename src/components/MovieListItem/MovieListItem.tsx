@@ -1,17 +1,13 @@
 import { useMutation, UseQueryResult } from 'react-query';
-import { CardContent, CardMedia, Typography, Tooltip } from '@mui/material';
-import { IconButton } from '@mui/material';
+import { CardContent, CardMedia, Typography } from '@mui/material';
 import { CardActionArea } from '@mui/material';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 
 import { MovieListItemModel, ErrorResponseModel, PostModel, MovieListModel} from '../../api/MovieAPI/MovieAPI.model';
 import MovieAPI from '../../api/MovieAPI/MovieAPI';
 import { BASE_IMAGE_URL } from '../../api/utils/consts';
+import { MovieListItemActions } from '../';
 import * as Styled from './MovieListItem.styles';
-import { truncate, calculateKey } from './MovieListItem.helpers';
+import { calculateKey } from './MovieListItem.helpers';
 
 type Props = {
   movieItem: MovieListItemModel;
@@ -48,7 +44,7 @@ const MovieListItem = ({
       },
     }
   );
-  const { title, overview, release_date, poster_path, id} = movieItem;
+  const { title, release_date, poster_path, id} = movieItem;
   const movieImage = poster_path ? `${BASE_IMAGE_URL}${poster_path}`: '';
 
   const addToFavorites = (id: number) => {
@@ -62,7 +58,7 @@ const MovieListItem = ({
   };
 
   return (
-    <Styled.MovieCard sx={{ width: '20%' }} className={className}>
+    <Styled.MovieCard sx={{ width: '20%' }} className={className} data-testid="movie-card-item">
       <CardActionArea>
         <CardMedia
           component="img"
@@ -70,12 +66,9 @@ const MovieListItem = ({
           alt={title}
         />
         <CardContent>
-          <Styled.MovieTitle gutterBottom variant="h5">
+          <Styled.MovieTitle gutterBottom variant="h5" data-testid="movie-card-title">
             {title}
           </Styled.MovieTitle>
-          <Styled.DescriptionContainer variant="body2" color="text.secondary">
-            {truncate(overview)}
-          </Styled.DescriptionContainer>
           <Typography variant="body2" color="text.secondary">
             <a href={`/movie-details/${id}`}>Read More</a>
           </Typography>
@@ -84,18 +77,13 @@ const MovieListItem = ({
           </Typography>
         </CardContent>
       </CardActionArea>
-      <Styled.ActionsContainer>
-        <Tooltip title="Favorites">
-          <Styled.AddFavouriteIcon onClick={() => addToFavorites(id)}>
-            {favorites.includes(id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </Styled.AddFavouriteIcon>
-        </Tooltip>
-        <Tooltip title="WatchList">
-          <IconButton onClick={() => addToWatchList(id)}>
-            {watchList.includes(id) ? <RemoveIcon /> :<AddIcon />}
-          </IconButton>
-        </Tooltip>
-      </Styled.ActionsContainer>
+      <MovieListItemActions
+        id={id}
+        favorites={favorites}
+        watchList={watchList}
+        addToFavorites={addToFavorites}
+        addToWatchList={addToWatchList}
+      />
     </Styled.MovieCard>
   );
 };

@@ -13,6 +13,7 @@ const AllMovies = () => {
     <MovieList
       query={allMoviesQuery}
       header="All Movies"
+      data-testid="all-movies-page"
     />
   );
 };

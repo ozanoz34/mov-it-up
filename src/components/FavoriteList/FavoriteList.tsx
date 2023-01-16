@@ -5,6 +5,7 @@ const FavoriteList = () => (
   <CreatedList
     header="Favorite Movies"
     listType={CREATED_LIST_TYPE.FAVORITE}
+    data-testid="favorite-list"
   />
 );
 

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { Card, Typography } from '@mui/material';
-import { IconButton } from '@mui/material';
-import { CardActions } from '@mui/material';
 
 const MovieCard = styled(Card)`
   margin: 20px;
@@ -17,16 +15,4 @@ const MovieTitle = styled(Typography)`
   text-align: center;
 `;
 
-const AddFavouriteIcon = styled(IconButton)`
-  color: red !important;
-`;
-
-const ActionsContainer = styled(CardActions)`
-  justify-content: center;
-`;
-
-const DescriptionContainer = styled(Typography)`
-  height: 150px;
-`;
-
-export { MovieCard, MovieTitle, AddFavouriteIcon, ActionsContainer, DescriptionContainer }
+export { MovieCard, MovieTitle }
